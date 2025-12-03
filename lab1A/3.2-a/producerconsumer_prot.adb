@@ -1,0 +1,74 @@
+with Ada.Text_IO;
+use Ada.Text_IO;
+
+with Ada.Real_Time;
+use Ada.Real_Time;
+
+with Buffer;
+use Buffer;
+
+with Ada.Numerics.Discrete_Random;
+
+procedure ProducerConsumer_Prot is
+
+   N : constant Integer := 10; -- Number of produced and consumed tokens per task
+	X : constant Integer := 3; -- Number of producers and consumers
+	
+   -- Random Delays
+   subtype Delay_Interval is Integer range 50..250;
+   package Random_Delay is new Ada.Numerics.Discrete_Random (Delay_Interval);
+   use Random_Delay;
+   G : Generator;
+	 -- ==> Complete code: Use Buffer
+	 B : Buffer.CircularBuffer; 	
+   
+	 task type Producer(Id : Positive);
+   task type Consumer(Id : Positive);
+
+   task body Producer is
+      Next : Time;
+			Value : Integer;
+   begin
+      Next := Clock;
+      for I in 1..N loop
+						
+         -- ==> Complete code: Write to Buffer
+			   Value := Random(G);
+				 B.Put(Value);
+				 Put_Line("Producer " & Integer'Image(Id) & " Put :"&Integer'Image(Value));  
+         -- Next 'Release' in 50..250ms
+         Next := Next + Milliseconds(Random(G));
+         delay until Next;
+      end loop;
+   end;
+
+   task body Consumer is
+      Next : Time;
+      X : Integer;
+   begin
+      Next := Clock;
+      for I in 1..N loop
+         -- Read from X
+				 B.Get(X);		
+         -- ==> Complete code: Read from Buffer
+			
+         Put_Line("Consumer " & Integer'Image(Id) & " Get :"&Integer'Image(X));
+         Next := Next + Milliseconds(Random(G));
+         delay until Next;
+      end loop;
+   end;
+	
+	 P1 : Producer(1);
+	 P2 : Producer(2);
+	 P3 : Producer(3);
+
+	 C1 : Consumer(1);
+	 C2 : Consumer(2);
+	 C3 : Consumer(3);
+
+	
+begin -- main task
+   null;
+end ProducerConsumer_Prot;
+
+
