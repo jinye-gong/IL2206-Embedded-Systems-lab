@@ -53,6 +53,12 @@ Topics:
 - **Watchdog + overload detection** and overload experiments
 - One **conditional/bonus task** (timer-based watchdog / gear box / accelerometer)
 
+## Academic integrity
+
+All files in this repository are intended **only** for study and course examination at KTH. 
+
+Please do **not** use this repository for plagiarism, and do **not** redistribute the solutions in ways that violate KTH’s rules on collaboration and academic honesty.
+
 ---
 
 
@@ -81,7 +87,18 @@ Topics:
 ### Lab 2
 
 - 在 ES Lab-Kit 上使用 **FreeRTOS**  
+
 - 裸机交通灯控制（不使用 RTOS）  
+
 - 基于 FreeRTOS 任务的 LED 握手与共享内存通信  
+
 - 实现多任务 **巡航控制（Cruise Control）** 应用  
+
 - 使用消息队列、定时任务和 **watchdog** 实现过载检测及扩展任务
+
+  
+
+## 使用说明与学术诚信
+
+- 本仓库仅用于 IL2206 课程学习与作业展示。
+- 请遵守 KTH 的学术诚信政策，不要将本仓库内容用于任何形式的抄袭或违规共享。
